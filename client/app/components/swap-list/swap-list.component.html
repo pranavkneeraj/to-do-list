@@ -1,0 +1,125 @@
+<!--<nav class="navbar navbar-inverse" role="navigation">
+     <!-- <button class="btn btn-primary btn-lg pull-right" md-mini-fab (click)="createNewTask()"><md-icon>Create Task</md-icon></button> -->
+<br>
+<div class="row">
+    <div class="col-sm-3">
+        <md-card>
+            <md-card-title>
+                New Task
+            </md-card-title>
+            <md-card-content>
+                <div class="dropdown" dropdown>
+                    <button class="btn btn-primary btn-sm" dropdown-open>|||</button>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="newFilter='created_date'">DueDate</a></li>
+                        <li><a (click)="newFilter='-priority'">Priority</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target'" [dragOverClass]="'drag-target-border'"
+                     [dragHintClass]="'drag-hint'" (onDrop)="onDrop($event, 'new')">
+
+                    <div class="card-block scroll-list">
+
+                        <div class="list-group">
+                            <span draggable *ngFor="let item of toDoList | statusFilterPipe : 'new' | orderBy : [newFilter]" [dragScope]="'swap-target'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item list-color">
+                                <md-card><md-card-content>{{item.name}}</md-card-content><md-card-footer>{{item.created_date | date:string}}</md-card-footer></md-card>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div class="col-sm-3">
+        <md-card>
+            <md-card-title>
+                On Hold
+            </md-card-title>
+            <md-card-content>
+                 <div class="dropdown" dropdown>
+                    <button class="btn btn-primary btn-sm" dropdown-open>|||</button>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="newFilter='created_date'">DueDate</a></li>
+                        <li><a (click)="newFilter='-priority'">Priority</a></li>
+                    </ul>
+                </div>
+                <br>
+
+                <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target'" [dragOverClass]="'drag-target-border'"
+                     [dragHintClass]="'drag-hint'" (onDrop)="onDrop($event, 'onHold')">
+                    <div class="card-block scroll-list">
+                        <ul class="list-group">
+                            <li draggable *ngFor="let item of toDoList | statusFilterPipe : 'onHold' | orderBy : [newFilter]" [dragScope]="'swap-target'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item list-color">
+                                <md-card><md-card-content>{{item.name}}</md-card-content><md-card-footer>{{item.created_date | date:string}}</md-card-footer></md-card>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+    </div>
+    <div class="col-sm-3">
+        <md-card>
+            <md-card-title>
+                In Progress
+            </md-card-title>
+            <md-card-content>
+                 <div class="dropdown" dropdown>
+                    <button class="btn btn-primary btn-sm" dropdown-open>|||</button>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="newFilter='created_date'">DueDate</a></li>
+                        <li><a (click)="newFilter='-priority'">Priority</a></li>
+                    </ul>
+                </div>
+
+                <br>
+
+                <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target'" [dragOverClass]="'drag-target-border'"
+                     [dragHintClass]="'drag-hint'" (onDrop)="onDrop($event, 'inProgress')">
+                    <div class="card-block scroll-list">
+                        <ul class="list-group">
+                            <li draggable *ngFor="let item of toDoList | statusFilterPipe : 'inProgress' | orderBy : [newFilter]" [dragScope]="'swap-target'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item list-color">
+                                <md-card><md-card-content>{{item.name}} </md-card-content><md-card-footer>{{item.created_date | date:string}}</md-card-footer></md-card>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+    </div>
+
+    <div class="col-sm-3">
+        <md-card>
+            <md-card-title>
+                Done
+            </md-card-title>
+            <md-card-content>
+                 <div class="dropdown" dropdown>
+                    <button class="btn btn-primary btn-sm" dropdown-open>|||</button>
+                    <ul class="dropdown-menu">
+                        <li><a (click)="newFilter='created_date'">DueDate</a></li>
+                        <li><a (click)="newFilter='-priority'">Priority</a></li>
+                    </ul>
+                </div>
+
+                <br>
+
+                <div class="card card-outline-primary mb-3" droppable [dropScope]="'swap-target'" [dragOverClass]="'drag-target-border'"
+                     [dragHintClass]="'drag-hint'" (onDrop)="onDrop($event, 'done')">
+                    <div class="card-block scroll-list">
+                        <ul class="list-group">
+                            <li draggable *ngFor="let item of toDoList | statusFilterPipe : 'done' | orderBy : [newFilter]"  [dragScope]="'swap-target'" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item list-color">
+                                <md-card><md-card-content>{{item.name}}</md-card-content><md-card-footer>{{item.created_date | date:string}}</md-card-footer></md-card>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+</div>

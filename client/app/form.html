@@ -1,0 +1,16 @@
+<div md-dialog-title>Create Task</div>
+<md-dialog-content>
+    <form class="full-width-input">
+        <md-input-container class="full-width-input" style="display:block">
+            <input mdInput placeholder="Task Name" [(ngModel)]="todo.name" [ngModelOptions]="{standalone: true}">
+        </md-input-container>
+        <br>
+        <md-input-container class="full-width-input" style="display:block">
+            <input mdInput placeholder="Priority" [(ngModel)]="todo.priority" [ngModelOptions]="{standalone: true}">
+        </md-input-container>
+    </form>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-button [md-dialog-close]="todo">Save</button>
+    <button md-button md-dialog-close [md-dialog-close]="false">Cancel</button>
+</md-dialog-actions>

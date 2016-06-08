@@ -1,0 +1,55 @@
+var isPublic = typeof window != "undefined";
+
+(function(global) {
+  // map tells the System loader where to look for things
+  var map = {
+    'app':                        'app', // 'dist',
+    '@angular':                   (isPublic)? '@angular' : 'node_modules/@angular',
+    'rxjs':                       (isPublic)? 'rxjs' : 'node_modules/rxjs',
+    '@angular/material': '@angular/material/bundles/material.umd.js',
+    '@angular/animations': '@angular/animations/bundles/animations.umd.js',
+    '@angular/animations/browser': '@angular/animations/bundles/animations-browser.umd.js',
+    '@angular/platform-browser/animations': '@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+    'ng2-drag-drop':              (isPublic)? 'ng2-drag-drop' : 'node_modules/ng2-drag-drop',
+    'ngx-resource':               (isPublic)? 'ngx-resource' : 'node_modules/ngx-resource',
+    "ngx-dropdown":               (isPublic)? 'ngx-dropdown' :"node_modules/ngx-dropdown"
+  };
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app':                        { main: 'main.js',  defaultExtension: 'js' },
+    'rxjs':                       { defaultExtension: 'js' },
+    'ng2-drag-drop':  { main: 'index.js',  defaultExtension: 'js' },
+    'ngx-resource':  { main: 'bundles/ngx-resource.umd.js',  defaultExtension: 'js' },
+    "ngx-dropdown": { "main": "index.js", "defaultExtension": "js" }
+  };
+  var ngPackageNames = [
+    'common',
+    'compiler',
+    'core',
+    'forms',
+    'http',
+    'platform-browser',
+    'platform-browser-dynamic',
+    'router',
+    'router-deprecated',
+    'upgrade',
+  //  'ng2-drag-drop'
+  ];
+  // Individual files (~300 requests):
+  function packIndex(pkgName) {
+    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+  }
+  // Bundled (~40 requests):
+  function packUmd(pkgName) {
+    packages['@angular/'+pkgName] = { main: 'bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+  }
+  // Most environments should use UMD; some (Karma) need the individual index files
+  var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
+  // Add package entries for angular packages
+  ngPackageNames.forEach(setPackageConfig);
+  var config = {
+    map: map,
+    packages: packages
+  };
+  System.config(config);
+})(this);
