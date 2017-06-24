@@ -6,8 +6,9 @@ import { SwapListComponent } from './components/swap-list/swap-list.component';
 
 const appRoutes: Routes = [
     {
-        path: 'todo',
-        component: AppComponent,
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
     },
    {
      path: 'dashboard',
